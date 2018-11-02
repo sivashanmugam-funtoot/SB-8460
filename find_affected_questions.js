@@ -94,7 +94,7 @@ fs.readdir(questionDirective, (err, files) => {
             if (affected) {
                 creatorsOfAffectedQs[data.result.assessment_item.createdBy] = 0;
                 console.log(chalk.yellow(JSON.stringify({ 'plugin': body.data.plugin.id, 'id': file, 'createBy' : data.result.assessment_item.createdBy })));
-                questionsAffected.push(file.split('.')[0])
+                questionsAffected.push({ 'plugin': body.data.plugin.id, 'id': file, 'createBy' : data.result.assessment_item.createdBy, 'name' : data.result.assessment_item.name })
             }
         })
     })

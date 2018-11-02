@@ -1,8 +1,10 @@
 var request = require("request");
 var chalk = require('chalk');
 var fs = require('fs');
+var envUrl = 'https://staging.ntp.net.in';
+var saveFileName = 'composite_search_result_NTP_STAGING.json'
 var options = { method: 'POST',
-  url: 'https://staging.open-sunbird.org/action/composite/v3/search',
+  url: envUrl + '/action/composite/v3/search',
   headers: 
    { 'Postman-Token': '3abec6eb-400c-4e69-8caf-290f35e482b0',
      'cache-control': 'no-cache',
@@ -13,8 +15,8 @@ var options = { method: 'POST',
    { request: 
       { filters: 
          { objectType: [ 'AssessmentItem' ],
-           createdOn: { '>': '2018-10-14T00:00:00.000+0530' },
-           status: [ 'Live' ] },
+           createdOn: { '>': '2018-10-13T00:00:00.000+0530' },
+           status: [ ] },
         fields: [ 'identifier' ],
         limit: 8000 } },
   json: true };
@@ -22,7 +24,7 @@ var options = { method: 'POST',
 request(options, function (error, response, body) {
   if (error) throw new Error(error);
   console.log(chalk.green('get Successful'));
-  fs.writeFile('composite_search_result_SUNBIRD_STAGING.json', JSON.stringify(body) ,function(err, data){
+  fs.writeFile(saveFileName, JSON.stringify(body.result.items) ,function(err, data){
       if(err){
           throw err;
       } 
