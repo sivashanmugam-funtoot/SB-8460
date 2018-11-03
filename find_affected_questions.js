@@ -23,7 +23,8 @@ app.get('/json', function (req, res) {
 
 
 
-const questionDirective = './all_questions-ntp-staging/';
+const questionDirective = './all_questions_diksha/';
+
 fs.readdir(questionDirective, (err, files) => {
     _.each(files, function (file) {
         fs.readFile(questionDirective + file, function (err, data) {
@@ -94,7 +95,7 @@ fs.readdir(questionDirective, (err, files) => {
             if (affected) {
                 creatorsOfAffectedQs[data.result.assessment_item.createdBy] = 0;
                 console.log(chalk.yellow(JSON.stringify({ 'plugin': body.data.plugin.id, 'id': file, 'createBy' : data.result.assessment_item.createdBy })));
-                questionsAffected.push({ 'plugin': body.data.plugin.id, 'id': file, 'createBy' : data.result.assessment_item.createdBy, 'name' : data.result.assessment_item.name })
+                questionsAffected.push(file.split('.json')[0])
             }
         })
     })

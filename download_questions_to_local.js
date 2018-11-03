@@ -1,10 +1,16 @@
 const fs = require('fs');
 const request = require("request");
 const _ = require('lodash');
-const store_path = './all_questions-ntp-staging/';
-const store_path_error_files = './error_questions-ntp-staging/';
-var envUrl = 'https://staging.ntp.net.in';
-var compositeSearchResultFile = './composite_search_result_NTP_STAGING.json';
+const chalk = require('chalk');
+
+
+//ENVIRONMENT VARS
+const store_path = './affected_questions_diksha_backup_nov_3/';
+const store_path_error_files = './error_questions_diksha/';
+var envUrl = 'https://diksha.gov.in/';
+var compositeSearchResultFile = './affected_questions_diksha.json';
+
+
 var options_base = {
     method: 'GET',
     url: envUrl + '/action/assessment/v3/items/read/',

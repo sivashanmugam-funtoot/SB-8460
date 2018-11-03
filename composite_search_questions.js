@@ -1,8 +1,8 @@
 var request = require("request");
 var chalk = require('chalk');
 var fs = require('fs');
-var envUrl = 'https://staging.ntp.net.in';
-var saveFileName = 'composite_search_result_NTP_STAGING.json'
+var envUrl = 'https://diksha.gov.in';
+var saveFileName = 'composite_search_result_DIKSHA_PROD.json'
 var options = { method: 'POST',
   url: envUrl + '/action/composite/v3/search',
   headers: 
@@ -15,8 +15,11 @@ var options = { method: 'POST',
    { request: 
       { filters: 
          { objectType: [ 'AssessmentItem' ],
-           createdOn: { '>': '2018-10-13T00:00:00.000+0530' },
-           status: [ ] },
+           createdOn: { 'min': '2018-10-14T00:00:00.000+0530', 'max' : '2018-10-27T00:00:00.000+0530'},
+
+           status: [ ],
+           version : 2,
+           },
         fields: [ 'identifier' ],
         limit: 8000 } },
   json: true };
